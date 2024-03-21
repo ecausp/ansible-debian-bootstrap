@@ -3,6 +3,7 @@
 - name: CI Tests
   hosts: all
   vars:
+    dbs_hostname: 'vagrant-box.leandroramos.me'
     dbs_groups:
       - name: 'admins'
       - name: 'docker'
