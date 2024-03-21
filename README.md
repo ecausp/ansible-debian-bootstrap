@@ -145,7 +145,7 @@ How to develop and test this role
 
 ### Vagrant way
 
-Install vagrant + virtualbox or docker
+Install vagrant + libvirt or docker
 
 ```commandline
 vagrant up debian-bullseye # with libvirt (or whatever)
