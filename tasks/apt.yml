@@ -73,27 +73,17 @@
     pkg: "{{ dbs_uninstall_packages }}"
     state: absent
 
-- name: APT | Install few packages
+- name: APT | Install packages
   ansible.builtin.apt:
     pkg: "{{ lookup('flattened', dbs_packages, dbs_distro_packages) }}"
     state: present
     update_cache: true
     cache_valid_time: 3600
 
-- name: APT | Install Intel Microcode if needed
+- name: APT | Install packages from debian-backports
   ansible.builtin.apt:
-    pkg: intel-microcode
+    pkg: "{{ lookup('flattened', dbs_backports_packages) }}"
     state: present
-    default_release: '{{ dbs_microcode_apt_distribution }}'
-  when: >
-    ansible_processor[0].find('Intel') != -1 and
-    ansible_architecture == 'x86_64'
-
-- name: APT | Install AMD Microcode if needed
-  ansible.builtin.apt:
-    pkg: amd64-microcode
-    state: present
-    default_release: '{{ dbs_microcode_apt_distribution }}'
-  when: >
-    ansible_processor[0].find('AMD') != -1 and
-    ansible_architecture == 'x86_64'
+    default_release: "{{ ansible_distribution_release }}-backports"
+    update_cache: true
+    cache_valid_time: 3600

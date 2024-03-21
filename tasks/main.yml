@@ -22,13 +22,6 @@
 - name: IMPORT_TASKS | Manage system users
   ansible.builtin.import_tasks: user.yml
 
-- name: INCLUDE_TASKS | Kick systemd
-  ansible.builtin.include_tasks: nosystemd.yml
-  when: >
-    ansible_distribution == 'Debian' and
-    not dbs_use_systemd and
-    not dbs_is_docker
-
 - name: INCLUDE_TASKS | Set hostname
   ansible.builtin.include_tasks: hostname.yml
   when: dbs_set_hostname and not dbs_is_docker
@@ -43,10 +36,6 @@
 - name: INCLUDE_TASKS | Manage locales
   ansible.builtin.include_tasks: locale.yml
   when: dbs_set_locale
-
-- name: INCLUDE_TASKS | Install NTP damon
-  ansible.builtin.include_tasks: ntp.yml
-  when: dbs_set_ntp
 
 - name: IMPORT_TASKS | Misc system configuration
   ansible.builtin.import_tasks: system.yml

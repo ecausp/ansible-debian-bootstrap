@@ -2,32 +2,23 @@
 
 galaxy_info:
   role_name: debian_bootstrap
-  namespace: hanxhx
-  author: Emilien Mantel
-  description: Normalize and prepare a Debian/Devuan/Ubuntu Linux server
-  company: TripleStack
+  namespace: leandroembu
+  author: Leandro Ramos (forked from Emilien Mantel)
+  description: Normalize and prepare a Debian server
+  company: PythonicCafe
   license: GPLv2
   min_ansible_version: '2.11'
   platforms:
     - name: Debian
       versions:
-        - stretch
-        - buster
         - bullseye
-    - name: Devuan
-      versions:
-        - ascii
-    - name: Ubuntu
-      versions:
-        - bionic
+        - bookworm
   galaxy_tags:
-    - networking
-    - packaging
     - system
     - debian
     - apt
     - alternatives
     - editor
-    - ntp
+    - ssh
 
 dependencies: []

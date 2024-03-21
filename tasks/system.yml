@@ -9,8 +9,6 @@
       path: "{{ dbs_alternative_awk }}"
     - name: "editor"
       path: "{{ dbs_alternative_editor }}"
-    - name: "nc"
-      path: "{{ dbs_alternative_netcat }}"
 
 - name: COPY | dotfiles for root
   ansible.builtin.copy:
@@ -22,8 +20,6 @@
   with_items:
     - "bashrc"
     - "vimrc"
-    - "screenrc"
-    - "gitconfig"
   when: dbs_use_dotfiles
 
 - name: SYSCTL | Tuning
@@ -34,3 +30,33 @@
     state: present
   with_dict: "{{ dbs_sysctl_config }}"
   when: not dbs_is_docker
+
+- name: COPY | Configure SSH
+  ansible.builtin.copy:
+    src: etc/ssh/sshd_config
+    dest: /etc/ssh/sshd_config
+    mode: 0644
+    owner: root
+    group: root
+
+- name: COPY | Configure vnstat
+  ansible.builtin.copy:
+    src: etc/vnstat.conf
+    dest: /etc/vnstat.conf
+    mode: 0644
+    owner: root
+    group: vnstat
+
+- name: COPY | Configure zabbix-agent2
+  ansible.builtin.copy:
+    src: etc/zabbix/zabbix_agent2.conf
+    dest: /etc/zabbix/zabbix_agent2.conf
+    mode: 0644
+    owner: root
+    group: root
+
+- name: RESTART | Services
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: restarted
+  loop: "{{ dbs_restart_services }}"

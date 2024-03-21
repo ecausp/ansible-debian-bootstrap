@@ -2,5 +2,5 @@
 // Managed by Ansible
 // ------------------
 
-APT::Install-Recommends "0";
+//APT::Install-Recommends "0";
 APT::Install-Suggests "0";

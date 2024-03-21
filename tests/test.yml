@@ -3,35 +3,32 @@
 - name: CI Tests
   hosts: all
   vars:
-    dbs_timezone: 'America/Havana'
-    dbs_uninstall_packages:
-      - 'atop'
     dbs_groups:
-      - name: 'administrator'
-      - name: 'superdaemon'
+      - name: 'admins'
+      - name: 'docker'
+      - name: 'dokku'
+      - name: 'supersysadmin'
         system: true
-      - name: 'regis'
+      - name: 'unwantegroup'
         state: 'absent'
     dbs_users:
-      - name: 'hanx'
+      - name: 'leandro'
         sudo: true
+        clear_password: 'q1w2e3r4t5'
+        groups:
+          - docker
+          - dokku
         ssh_keys:
-          - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDSps/VDsZlUfhCunjC15A8kYa1zn3hjLAk4M1NwBvQzRYoaOKpUnBJaCo+xGduYh+zfCyHWcycvZfZXeh2nmuzvhlvyeGAcX5ZCoRaGiXA+uhXNViZInYiKqfXZjPUrJXHqXJ6wl6dLPGCPdnDhMyp7v8eQKRIr0ejzrSPrmj7k8xU065HF56xO7DNpCs3b+W3WeutzcTE4rXVTrxLKmVaW+m+9IPCM/6eK2sH7ok4xkN8U73+KGAVtJDFLisu8E1LD+Kp/f3orpV3KFfJ2nfHhWghM24SrQsok0JJAzdWQMKDOzJXCFWQHL2TlZyfqcr56+xB2yn/HneU8wKLlBxh hanx@emantel'
-      - name: 'hx'
-        group: 'www-data'
-        groups: 'superdaemon'
-        shell: '/usr/bin/zsh'
-        sudo: false
-        clear_password: '1a2b3c'
-        update_password: 'on_create'
-      - name: 'gunther'
-        password: '$6$fFXafeiTssSG3LX3$/ji4TrTVWJwQdgKeLs69OtmXbpe6faCw7XCO5xzHSv3FqVdHA0qjgs01ZovYQBt./5vH5eUVT7XeOpb0PRtQh/'   # tralala
+          - 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC69UwcNtf/ggwmdh3chtj2aYkw/lvGwLLi86Nyr0B5ZWpOOQKJ2PsejgnUKSFL9z6yElR/WUEqgQZmVii8YLIR2ii/4HsJdIRP4vFF5Ux5eVOHZTPTtc7lSgqfAZewGQr49Av+lRz2r76GFRhEpc4QD0fij8WuRZXiADySzw23IDvpQ1AQphyyvTcGDLxvXbaZkgIAAs6BLIRWOxX3EHQYzglntmuDXzl3S1gZj14dxsEMqID59wYjQMQG2LAeIC407u7tG+ibLJjW6bFoH5pNWtb4vUqeHD5aOH5cC7z/pj/9jGYVqrQpRTWwsoTMh9FfkINQ8n49rLUq1OH+G6a+CtObRthHrPZeSVBG13Je9kVn0VMwNqcQ4KCL6cxARguFGCvulnRo/RYJVHSZGP00fZ3BVaO+UEKPdYqGhbQachRlR1pAqjQeVe5UemqsY1sXrPNqe1kCytakrD3g9ONLvsOAC++qboSmEQcPOg3lN1d+UbnWFzAvka6PP3TJGCdsLHsrNVICXk4ubvXSozWLzr9QqmV1UzQDqFu5KFam3YIhMkQ9E8XfgQ4FZxhcsn52JuwYqfn5esCOd08B9YU7jpXQjt/6jLRQn7kMJqUheCd7gK02bt1dWoNE6Gf9T+DCHyJ/KSHEEun3aAcudG0WF3PtoB8928r+VTD1uiEh3w== leandroramos@disroot.org'
         shell: '/bin/bash'
-      - name: 'regis'
-        state: 'absent'
-    dbs_ntp_pkg: 'ntp'
-    dbs_locales:
-      - 'en_US.UTF-8'
-      - 'fr_FR.UTF-8'
+      - name: 'turicas'
+        sudo: true
+        clear_password: 'q1w2e3r4t5'
+        groups:
+          - docker
+          - dokku
+        ssh_keys:
+          - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NkoMRj06f36yUrCaJuhnB7Xc8V6wi0Njic10l/zh3DFFFqSiVwgQIakK4QqmtVIKA1rf/q1Vh6rYxM2sa8NAExp3cT3Crwnuc64bAnvdNxhIj+PESMCaECqq4D5K6+ArEcU7a7hAHn1u39XsRqa5QXJGkcNnQeXr6TYkU6mZVH6QX4Slotg6ePS0F/Y58ZdyDDdXRrpx8n6DxWTHVThY+tjf5B31sCvplY9WAr4NnRx9llbf6ZmZMbQJlRSqIR4oqnlO3UYzByhzMk9pGv0rHb/evw/kLcPxPRUESedOYkxVq8aJdFGxNFEAtQJTy9eeuEtBrjbV8z/2Hl3ye0g+w==
+        shell: '/bin/bash'
   roles:
     - ../../

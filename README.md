@@ -1,36 +1,28 @@
-Ansible Debian/Devuan/Ubuntu/Raspbian bootstrap
+Ansible Debian bootstrap
 ====================================================
 
-[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-HanXHX.debian_bootstrap-blue.svg)](https://galaxy.ansible.com/HanXHX/debian_bootstrap) ![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/hanxhx/ansible-debian-bootstrap/molecule.yml?branch=master)
+[![Ansible Galaxy](http://img.shields.io/badge/ansible--galaxy-leandroembu.debian_bootstrap-blue.svg)](https://galaxy.ansible.com/leandroembu/debian_bootstrap)
 
-This role bootstraps Debian/Devuan/Ubuntu/Raspbian hosts:
+**Forked from** [HanXHX/ansible-debian-bootstrap](https://github.com/HanXHX/ansible-debian-bootstrap) to deploy only Debian servers. Do not use it if you want to bootstrap Ubuntu/Devuan/Raspbian servers.
+
+This role bootstraps Debian hosts:
 
 - Configure APT (sources.list)
 - Install minimal packages (vim, htop...)
-- Install Intel/AMD microcode if needed
-- Install and configure NTP daemon ([OpenNTPd](http://www.openntpd.org/) or [NTP](http://support.ntp.org/))
+------------------
+
 - Add groups, users with SSH key, sudoers
 - Deploy bashrc, vimrc for root
 - Update few alternatives
 - Configure system: hostname, timezone and locale
-- Purge, delete and avoid systemd if wanted
 - Sysctl tuning
 
 Supported versions
 
 | OS                     | Working      | Stable (active support) |
 | ---------------------- | -------      | ----------------------- |
-| Debian Stretch (9)     | Yes          | Yes                     |
-| Debian Buster (10)     | Yes          | Yes                     |
 | Debian Bullseye (11)   | Yes          | Yes                     |
-| Debian Bookworm (12)   | Yes          | No                      |
-| Devuan Ascii (2)       | Yes          | No                      |
-| Raspbian Stretch (9)   | Experimental | No                      |
-| Raspbian Buster (10)   | Experimental | No                      |
-| Raspbian Bullseye (11) | Experimental | No                      |
-| Ubuntu Bionic (18.04)  | Yes          | No                      |
-| Ubuntu Focal (20.04)   | Experimental | No                      |
-| Ubuntu Jammy (22.04)   | Experimental | No                      |
+| Debian Bookworm (12)   | Yes          | Yes                     |
 
 Requirements
 ------------
@@ -55,7 +47,6 @@ Theses variables define hostname to configure APT (normal repo and backports):
 - `dbs_clean_hosts`: if true, manages `/etc/hosts` file
 - `dbs_set_locale`: if true, configure locales
 - `dbs_set_timezone`: if true, set timezone
-- `dbs_set_ntp`: if true, install and configure OpenNTPd
 - `dbs_set_apt`: if true, configure APT repository
 
 ### System configuration
@@ -75,14 +66,9 @@ Theses variables define hostname to configure APT (normal repo and backports):
 - `dbs_alternative_editor`
 - `dbs_alternative_awk`
 
-### NTPd
-
-- `dbs_ntp_hosts`: hostnames NTP server list
-- `dbs_ntp_pkg`: package used to provide NTP: "openntpd" or "ntp"
-
 ### Group
 
-- `dbs_groups`: list of group
+- `dbs_groups`: list of groups
 
 Each row have few keys:
 
@@ -108,7 +94,7 @@ Each row have few keys:
 - `sudo`: (O) boolean (true = can sudo)
 - `group`: (O) main group (default is `name` without password)
 - `groups`: (O) comma separated list of groups
-- `createhome`: (O) yes/no
+- `createhome`: (O) yes/no (default is yes)
 - `system`: (O) yes/no (default: no)
 - `ssh_keys`: (O) ssh public keys list
 - `state`: (O) present/absent (default: present)
@@ -126,7 +112,6 @@ For more information, look [ansible user module doc](http://docs.ansible.com/ans
 ### Readonly vars
 
 - `dbs_packages`: list of packages to install
-- `dbs_microcode_apt_distribution`: location of package to install microcode
 - `dbs_distro_packages`: list specific package to install (related to OS version)
 - `dbs_is_docker`: boolean. Is true if current is a docker container
 
@@ -136,7 +121,10 @@ Dependencies
 None.
 
 Example Playbook
-----------------
+----------------Author Information
+------------------
+
+- Twitter: [@hanxhx_](https://twitter.com/hanxhx_)
 
     - hosts: servers
       roles:
@@ -148,7 +136,6 @@ About Docker
 
 Due to Docker limitations, theses features are disabled:
 
-- Removing systemd
 - Setting hostname
 - Configure sysctl
 
@@ -161,41 +148,14 @@ How to develop and test this role
 Install vagrant + virtualbox or docker
 
 ```commandline
-vagrant up debian-bullseye # with virtualbox
+vagrant up debian-bullseye # with libvirt (or whatever)
 vagrant up docker-debian-bullseye # with docker
 ```
-
-### Molecule way
-
-Install:
-
-```commandline
-pip install molecule molecule[docker]
-```
-
-Run:
-
-```commandline
-molecule -vv -c molecule/_shared/base.yml converge -s ubuntu-22.04
-```
-
 
 License
 -------
 
 GPLv2
-
-Donation
---------
-
-If this code helped you, or if you’ve used them for your projects, feel free to buy me some :beers:
-
-- Bitcoin: `1BQwhBeszzWbUTyK4aUyq3SRg7rBSHcEQn`
-- Ethereum: `0x63abe6b2648fd892816d87a31e3d9d4365a737b5`
-- Litecoin: `LeNDw34zQLX84VvhCGADNvHMEgb5QyFXyD`
-- Monero: `45wbf7VdQAZS5EWUrPhen7Wo4hy7Pa7c7ZBdaWQSRowtd3CZ5vpVw5nTPphTuqVQrnYZC72FXDYyfP31uJmfSQ6qRXFy3bQ`
-
-No crypto-currency? :star: the project is also a way of saying thank you! :sunglasses:
 
 Author Information
 ------------------

@@ -1,55 +1,87 @@
 ---
 
 dbs_packages:
+  - apt-listbugs
   - apt-transport-https
-  - aptitude
+  - aria2
+  - asciinema
   - bash-completion
-  - binutils
-  - bmon
-  - cpanminus
+  - bridge-utils
+  - build-essential
+  - byobu
+  - ca-certificates
+  - cbm
   - curl
-  - cron
-  - debconf-utils
-  - debian-goodies
   - dnsutils
-  - gawk
-  - gnupg
+  - duc
+  - ethtool
+  - fakeroot
+  - file
   - git
+  - git-lfs
+  - gnupg
+  - gnupg-agent
+  - gnupg2
+  - golang
   - hdparm
   - htop
-  - hping3
   - iotop
+  - iperf
   - iptraf-ng
-  - jq
-  - locales
+  - libbz2-dev
+  - libffi-dev
+  - liblzma-dev
+  - libncurses5-dev
+  - libncursesw5-dev
+  - libpq-dev
+  - libreadline-dev
+  - libsqlite3-dev
+  - libssl-dev
+  - linux-cpupower
+  - linux-image-amd64
   - lsb-release
+  - lshw
   - lsof
   - lynx
   - make
-  - most
-  - mutt
-  - netcat-openbsd
-  - netcat-traditional
+  - mtr
+  - ncdu
+  - ndppd
   - nmap
   - nmon
-  - parallel
+  - ntpdate
+  - nvme-cli
+  - p7zip
+  - parted
+  - postgresql-client
   - psmisc
-  - pv
-  - python{% if ansible_python_version is version('3', '>=') %}3{% endif %}-pip
-  - python{% if ansible_python_version is version('3', '>=') %}3{% endif %}-pycurl
-  - pwgen
-  - reptyr
-  - rsyslog
+  - python3-dev
+  - python3-pip
+  - python3-setuptools
   - rsync
-  - screen
-  - strace
+  - rsyslog
+  - software-properties-common
+  - sqlite3
   - sudo
-  - swaks
-  - sysstat
+  - tcptraceroute
   - telnet
-  - tcpdump
+  - time
+  - tmux
+  - tree
+  - tsocks
+  - unar
   - unzip
-  - vim
+  - vim-nox
+  - vnstat
+  - w3m
+  - wget
+  - whois
+  - xz-utils
+  - zabbix-agent2
+  - zip
+  - zlib1g-dev
+
+dbs_backports_packages:
+  - zabbix-agent2
 
 dbs_distro_packages: []
-dbs_sysvinit_packages: ["sysvinit-core", "sysvinit-utils"]
