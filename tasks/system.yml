@@ -1,5 +1,4 @@
 ---
-
 - name: ALTERNATIVES | Set commons
   community.general.alternatives:
     name: "{{ item.name }}"
@@ -46,14 +45,6 @@
     mode: 0644
     owner: root
     group: vnstat
-
-- name: TEMPLATE | Configure zabbix_agent2
-  ansible.builtin.template:
-    src: etc/zabbix/zabbix_agent2.conf.j2
-    dest: /etc/zabbix/zabbix_agent2.conf
-    mode: 0644
-    owner: root
-    group: root
 
 - name: RESTART | Services
   ansible.builtin.service:
