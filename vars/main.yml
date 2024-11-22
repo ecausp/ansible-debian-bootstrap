@@ -11,6 +11,7 @@ dbs_packages:
   - curl
   - dnsutils
   - ethtool
+  - fail2ban
   - fakeroot
   - git
   - git-lfs
